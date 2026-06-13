@@ -1,58 +1,57 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# **Documentación Oficial QuickPark**
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+**Desarrollador:** Victor Jesus González González  
+**Estudio:** EVG Dev Studio
 
-## About Laravel
+## **1\. Comandos de Inicialización del Sistema**
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Para levantar el entorno de desarrollo completo, incluyendo el microservicio de reconocimiento óptico (OCR) basado en FastAPI/Uvicorn, ejecuta los siguientes comandos en diferentes pestañas de tu terminal (Laragon/Local):
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+`# 1. Iniciar servidor Backend/Frontend (PHP Laravel)`  
+`php artisan serve`
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+`# 2. Compilar assets en tiempo real (Tailwind CSS / Alpine.js)`  
+`npm run dev`
 
-## Learning Laravel
+`# 3. Iniciar el Motor de Escáner de Matrículas (Python OCR API)`  
+`# (Asegúrate de activar tu entorno virtual si usas uno: venv\Scripts\activate)`  
+`python -m uvicorn main:app --host 127.0.0.1 --port 8000`
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+`# 4. Limpiar cachés (Solo en caso de errores 403 o rutas no encontradas)`  
+`php artisan route:clear`  
+`php artisan cache:clear`  
+`php artisan config:clear`
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## **2\. Identidad Visual y Paleta de Colores (SaaS Premium)**
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+El sistema utiliza una arquitectura visual moderna basada en **Glassmorphism (acristalamiento)**, bordes orgánicos suaves y sombras expansivas, diseñado para reducir la carga cognitiva del operador en jornadas largas.
 
-## Agentic Development
+| Elemento Visual | Clases / Implementación Tailwind | Uso Principal en el Sistema |
+| :---- | :---- | :---- |
+| Gradiente Corporativo | `from-qp-blue to-qp-indigo` | Botones CTA principales (Guardar, Actualizar) e Iconos de cabecera de sección. |
+| Fondos Acristalados | `bg-white/60 backdrop-blur-2xl` | Contenedores maestros, Modales de creación/edición, y envoltorios de Tablas. |
+| Efecto "Lift" Interactivo | `hover:-translate-y-1 hover:scale-[1.02]` | Se utiliza en las filas de las tablas de datos y tarjetas de estadísticas para simular elevación física. |
+| Notificaciones (Toasts) | `fixed top-28 left-1/2 z-[100]` | Mensajes dinámicos de Éxito (Verde) y Error (Rojo) que flotan bajo la barra de navegación. |
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+## **3\. Estructura de Vistas Refactorizadas**
 
-```bash
-composer require laravel/boost --dev
+* **Directorio de Clientes:** Tabla separada (border-separate) con efecto de levantamiento individual. Buscador dinámico integrado con Alpine.js y Modal VIP de edición de conductores.  
+* **Configuración de Tarifas:** Tarjetas interactivas que emplean reactividad para ocultar/mostrar campos de cobro dependiendo del modo (Plano, Hora, Mixto).  
+* **Historial de Registros:** Panel gerencial con métricas rápidas (tickets facturados, ingresos totales) y vista detallada con indicadores luminosos de estado de entrada/salida.  
+* **Auditoría de Turnos:** Sistema avanzado de visualización de arqueos. Incluye lógica de colores para descuadres de caja (verde si cuadra exacto, rojo si falta dinero, ámbar si sobra).  
+* **Gestión de Puestos (Capacidad):** Sistema de creación masiva algorítmica y eliminación múltiple (bulk delete) asistida por checkboxes, con protección estricta sobre puestos en estado "OCUPADO".  
+* **Información de la Empresa & Control de Divisas:** Interfaz centrada estilo "display financiero", con tipografía ampliada para maximizar la legibilidad de la moneda y los datos fiscales impresos en los tickets.
 
-php artisan boost:install
-```
+## **4\. Arquitectura de Controladores y Lógica Backend**
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+* **TicketController:** Motor matemático encargado del cálculo de tarifas en tiempo real según la modalidad de cobro parametrizada, y puente para el escáner OCR.  
+* **ParkingSpaceController:** Integración de bucles iterativos y el método firstOrCreate de Eloquent para la generación secuencial masiva, mitigando choques por duplicidad de identificadores.  
+* **Middleware (CheckRole):** Vigilante central que gestiona la redirección segura de los perfiles de usuario, bloqueando módulos no autorizados de manera silenciosa (redirigiendo) o estricta (Error 403).
 
-## Contributing
+## **5\. Roadmap Próxima Fase: Integración de Hardware**
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+El próximo paso para el sistema implica la salida del entorno puramente de software hacia el control de electrónica externa:
 
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+1. Desarrollo de controladores con capacidad de petición HTTP/Sockets para comunicarse con microcontroladores (Ej. ESP32).  
+2. Automatización de pulso de apertura para balancines de entrada vinculado a la emisión y guardado del ticket inicial.  
+3. Automatización de pulso de apertura para balancines de salida estrictamente vinculado a la validación de la factura (Checkout).
